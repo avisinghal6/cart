@@ -13,8 +13,23 @@ class CartItem extends React.Component{
     }
 
     increaseQuantity= () => { //used arrow functions as they inherit the scope of 'this'
-        console.log('this', this.state);
+        // console.log('this', this.state);
+        //setState form 1, it helps to re render react components
+        this.setState({
+            qty:this.state.qty +1
+        });
+
+        //setState form 2, pass a callback
+        // this.setState((prevState) => {
+        //     return {
+        //         qty: prevState.qty +1
+        //     }
+        // });
         }
+
+        //Using setState function, React is actually doing shallow merging, which means it will only change the property
+        // specified by us in the setState function, in this case 'qty', other properties will not be touched.
+        // after changing the 'qty', 'render' function is called by react to rerender the page.
 
     render(){
         const { price, title, qty} = this.state; //object destructuring
@@ -36,12 +51,13 @@ class CartItem extends React.Component{
                             alt="increase" 
                             className="action-icons" 
                             src="https://as2.ftcdn.net/v2/jpg/01/26/10/59/1000_F_126105961_6vHCTRX2cPOnQTBvx9OSAwRUapYTEmYA.jpg"
-                             />
+                            onClick= {this.increaseQuantity}
+                            />
                         <img 
                             alt="decrease" 
                             className="action-icons" 
                             src="https://cdn-icons-png.flaticon.com/512/992/992683.png" 
-                            onClick= {this.increaseQuantity}
+                            
                             />
                         <img 
                             alt="delete" 
