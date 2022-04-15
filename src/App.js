@@ -16,28 +16,52 @@ class App extends React.Component {
 }
 
 componentDidMount () {
-  firebase
-    .firestore()
-    .collection('products')
-    .get()
-    .then((snapshot) => {
-      // console.log(snapshot);
-      snapshot.docs.map((doc) => { //docs is an array
-      //  console.log(doc.data);
+  // firebase
+  //   .firestore()
+  //   .collection('products')
+  //   .get()
+  //   .then((snapshot) => {
+  //     // console.log(snapshot);
+  //     snapshot.docs.map((doc) => { //docs is an array
+  //     //  console.log(doc.data);
 
-      });
+  //     });
       
-      const products = snapshot.docs.map((doc) => {
-        const data= doc.data();
-        data['id']= doc.id;
-        return data;
-      });
+  //     const products = snapshot.docs.map((doc) => {
+  //       const data= doc.data();
+  //       data['id']= doc.id;
+  //       return data;
+  //     });
 
-      this.setState({
-        products,
-        loading: false
-      })
+  //     this.setState({
+  //       products,
+  //       loading: false
+  //     })
+  //   })
+
+
+  firebase
+  .firestore()
+  .collection('products')
+  .onSnapshot((snapshot) => { //added a listener
+    // console.log(snapshot);
+    snapshot.docs.map((doc) => { //docs is an array
+    //  console.log(doc.data);
+
+    });
+    
+    const products = snapshot.docs.map((doc) => {
+      const data= doc.data();
+      data['id']= doc.id;
+      return data;
+    });
+
+    this.setState({
+      products,
+      loading: false
     })
+  })
+  
 }
 
 handleIncreaseQuantity= (product) => { 

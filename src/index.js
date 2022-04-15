@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const firebaseConfig = {
 //add firebase config here
- 
+
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
