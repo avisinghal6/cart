@@ -115,10 +115,20 @@ handleDecreaseQuantity= (product) => {
 handleDeleteProduct = (id) => {
     const {products} = this.state;
 
-    const items = products.filter((item) => item.id!== id);
-    this.setState({
-        products: items
-    })
+    const docRef= this.db.collection('products').doc(id);
+
+    docRef
+      .delete()
+      .then(() => {
+        console.log('deleted successfully')
+      })
+      .catch((err) => {
+        console.log("error",err)
+      })
+    // const items = products.filter((item) => item.id!== id);
+    // this.setState({
+    //     products: items
+    // })
 }
 
 getCartCount= ()=> {
