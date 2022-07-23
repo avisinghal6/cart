@@ -141,6 +141,8 @@ getCartCount= ()=> {
 
   });
 
+  return count;
+
 }
 
 getCartTotal= ()=> {
